@@ -1,15 +1,10 @@
-// @flow
-import React, { Component } from 'react';
-import Home from '../components/Home';
+import React from 'react';
 
-type Props = {};
-
-export default class HomePage extends Component<Props> {
-  props: Props;
+export default class HomePage extends React.Component {
 
   render() {
     return (
-      <Home />
+      <div />
     );
   }
 }
