@@ -26,7 +26,7 @@ class Sidebar extends React.Component {
   render() {
     return(
       <Layout.Sider
-        style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
+        style={{ overflow: 'auto', height: '100vh'}}
         collapsible
         collapsed={this.state.collapsed}
         onCollapse={(collapsed) => this.onCollapse(collapsed)}

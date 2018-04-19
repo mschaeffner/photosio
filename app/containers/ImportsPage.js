@@ -2,7 +2,7 @@ import React from 'react';
 import { remote } from 'electron';
 import fs from 'fs';
 import path from 'path';
-import { Slider, Button } from 'antd';
+import { Button, Checkbox, Input } from 'antd';
 
 export default class ImportsPage extends React.Component {
 
@@ -20,10 +20,6 @@ export default class ImportsPage extends React.Component {
     )
   }
 
-  onSlideChange(value) {
-    this.setState({sliderValue: value});
-  }
-
   handleSelectedPath(dir) {
     fs.readdir(dir, (err, files) => {
       if(err) {
@@ -38,27 +34,38 @@ export default class ImportsPage extends React.Component {
   }
 
   render() {
-
-    const imgWidth = (100 / this.state.sliderValue) + '%';
-
     return (
       <div>
-        <h2>Imports</h2>
+        <Button type="primary" onClick={() => this.showDialog() }>Import new photos</Button>
 
-        <Slider
-          min={3}
-          max={10}
-          defaultValue={5}
-          onChange={(value) => this.onSlideChange(value)}
-          tipFormatter={null}
-        />
-
-        <Button type="primary" onClick={() => this.showDialog() }>From directory</Button>
-
-        <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        <div>
           {this.state.files.map(file =>
-            <div key={file} style={{width: imgWidth, padding: 10}}>
-              <img alt="alt" src={file} style={{width: '100%', border: '1px solid #DDD'}} />
+            <div key={file} style={{display: 'flex'}}>
+
+              <div style={{width: 50}}>
+                <Checkbox checked={true} onChange={(e) => console.log(e.target.checked)} />
+              </div>
+
+              <div style={{width: 200}}>
+                <img alt="alt" src={file} style={{width: '100%', border: '1px solid #DDD'}} />
+              </div>
+
+              <div style={{flex: 1}}>
+
+                <div>
+                  <Input placeholder="Title" />
+                </div>
+                <div>
+                  <Input placeholder='Tags' />
+                </div>
+                <div>
+                  <Input placeholder='Location' />
+                </div>
+
+
+              </div>
+
+
             </div>
           )}
         </div>
