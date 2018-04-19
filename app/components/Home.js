@@ -45,18 +45,16 @@ export default class Home extends Component<Props> {
   render() {
     return (
       <div>
-        <div className={styles.container} data-tid="container">
-          <h2>Home</h2>
-          <Link to="/counter">to Counter</Link>
-          <button onClick={() => this.showDialog() }>Select directory</button>
+        <h2>Home</h2>
+        <Link to="/counter">to Counter</Link>
+        <button onClick={() => this.showDialog() }>Select directory</button>
 
-          {this.state.files.map(file =>
-            <div key={file}>
-              <img style={{width: "100px"}} src={file} />
-            </div>
-          )}
+        {this.state.files.map(file =>
+          <div key={file}>
+            <img style={{width: "100px"}} src={file} />
+          </div>
+        )}
 
-        </div>
       </div>
     );
   }
