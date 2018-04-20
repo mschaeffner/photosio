@@ -7,9 +7,7 @@ export default class App extends React.Component {
     return (
       <Layout style={{ height: '100vh' }}>
         <Sidebar />
-        <Layout.Content style={{ padding: 10, backgroundColor: '#fff' }}>
-          {this.props.children}
-        </Layout.Content>
+        {this.props.children}
       </Layout>
     );
   }

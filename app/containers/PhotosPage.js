@@ -4,6 +4,7 @@ import path from 'path'
 import os from 'os';
 import { Slider, Input } from 'antd';
 import MonthSection from '../components/MonthSection';
+import { PageWrapper, PageHeader, PageBody } from '../components/PageLayout';
 
 const DATA_DIR = path.resolve(os.homedir(), 'photosio/data');
 
@@ -37,18 +38,17 @@ export default class PhotosPage extends React.Component {
     const searchStyle = this.state.searchFocus ? {width:'500px'} : {width:'150px'}
 
     return (
-      <div>
+      <PageWrapper>
 
-        <div style={{display:'flex', justifyContent: 'space-between'}}>
-          <div style={{width:'100px'}}>
-            <Slider
-              min={3}
-              max={10}
-              defaultValue={this.state.sliderValue}
-              onChange={(value) => this.onSlideChange(value)}
-              tipFormatter={null}
-            />
-          </div>
+        <PageHeader>
+          <Slider
+            min={3}
+            max={10}
+            defaultValue={this.state.sliderValue}
+            onChange={(value) => this.onSlideChange(value)}
+            tipFormatter={null}
+            style={{width:'100px'}}
+          />
 
           <Input
             placeholder="Search"
@@ -56,17 +56,17 @@ export default class PhotosPage extends React.Component {
             onBlur={() => this.setState({searchFocus:false})}
             onFocus={() => this.setState({searchFocus:true})}
           />
+        </PageHeader>
 
-        </div>
+        <PageBody>
+          <MonthSection title='April 2018' files={this.state.files} imgWidth={imgWidth}/>
+          <MonthSection title='March 2018' files={this.state.files} imgWidth={imgWidth}/>
+          <MonthSection title='Febraury 2018' files={this.state.files} imgWidth={imgWidth}/>
+          <MonthSection title='January 2018' files={this.state.files} imgWidth={imgWidth}/>
+          <MonthSection title='December 2017' files={this.state.files} imgWidth={imgWidth}/>
+        </PageBody>
 
-
-        <MonthSection title='April 2018' files={this.state.files} imgWidth={imgWidth}/>
-        <MonthSection title='March 2018' files={this.state.files} imgWidth={imgWidth}/>
-        <MonthSection title='Febraury 2018' files={this.state.files} imgWidth={imgWidth}/>
-        <MonthSection title='January 2018' files={this.state.files} imgWidth={imgWidth}/>
-        <MonthSection title='December 2017' files={this.state.files} imgWidth={imgWidth}/>
-
-      </div>
+      </PageWrapper>
     );
   }
 

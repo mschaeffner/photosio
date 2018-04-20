@@ -2,7 +2,8 @@ import React from 'react';
 import { remote } from 'electron';
 import fs from 'fs';
 import path from 'path';
-import { Button, Checkbox, Input } from 'antd';
+import { Button, Input, Timeline } from 'antd';
+import { PageWrapper, PageHeader, PageBody } from '../components/PageLayout';
 
 export default class ImportsPage extends React.Component {
 
@@ -35,42 +36,53 @@ export default class ImportsPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button type="primary" onClick={() => this.showDialog() }>Import new photos</Button>
+      <PageWrapper>
 
-        <div>
-          {this.state.files.map(file =>
-            <div key={file} style={{display: 'flex'}}>
+        <PageHeader>
+          <Button type="primary" onClick={() => this.showDialog() }>Import new photos</Button>
+        </PageHeader>
 
-              <div style={{width: 50}}>
-                <Checkbox checked={true} onChange={(e) => console.log(e.target.checked)} />
-              </div>
 
-              <div style={{width: 200}}>
-                <img alt="alt" src={file} style={{width: '100%', border: '1px solid #DDD'}} />
-              </div>
+        <PageBody>
+          <Timeline style={{margin: '25px 0'}}>
+            <Timeline.Item>
+              <b>13.04.2018:</b> You imported 566 photos from <i>Document/photos/urlaub</i>.
+            </Timeline.Item>
+            <Timeline.Item>
+              <b>24.03.2018:</b> You imported 2332 photos from <i>SD-Card</i>.
+            </Timeline.Item>
+            <Timeline.Item>
+              <b>12.02.2018:</b> You imported 212 photos from <i>iPhone</i>.
+            </Timeline.Item>
+          </Timeline>
 
-              <div style={{flex: 1}}>
+          <div>
+            {this.state.files.map(file =>
+              <div key={file} style={{display: 'flex'}}>
 
-                <div>
-                  <Input placeholder="Title" />
+                <div style={{width: 200}}>
+                  <img alt="alt" src={file} style={{width: '100%', border: '1px solid #DDD'}} />
                 </div>
-                <div>
-                  <Input placeholder='Tags' />
-                </div>
-                <div>
-                  <Input placeholder='Location' />
-                </div>
 
+                <div style={{flex: 1}}>
+
+                  <div>
+                    <Input placeholder="Comment" />
+                  </div>
+                  <div>
+                    <Input placeholder='Keywords' />
+                  </div>
+
+                </div>
 
               </div>
+            )}
+          </div>
+
+        </PageBody>
 
 
-            </div>
-          )}
-        </div>
-
-      </div>
+      </PageWrapper>
     );
   }
 
